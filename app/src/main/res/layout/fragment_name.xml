@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:background="#126a6a"
+    android:padding="0dp"
+    tools:context=".NameFragment">
+
+    <TextView
+        android:id="@+id/nameError"
+        style="@style/errorText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameContainer" />
+
+    <Button
+        android:id="@+id/nameSubmit"
+        android:text="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        style="@style/submitButton" />
+
+    <LinearLayout
+        android:id="@+id/nameContainer"
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/nameSubmit"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/name"
+            style="@style/textInput"
+            android:layout_width="match_parent"
+            android:hint="FULL NAME"
+            android:imeOptions="actionNext"
+            android:inputType="textPersonName" />
+        <requestFocus/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/zipcode"
+                style="@style/textInput"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
+                android:hint="ZIP CODE"
+                android:imeOptions="actionNext"
+                android:inputType="text|number" />
+
+            <EditText
+                android:id="@+id/height"
+                style="@style/textInput"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
+                android:hint="HEIGHT (in cms)"
+                android:imeOptions="actionDone"
+                android:inputType="text|number" />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
