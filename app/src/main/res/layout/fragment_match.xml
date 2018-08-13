@@ -45,18 +45,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/open_sans_semibold"
                 android:text="Interested In: "
+                android:fontFamily="@font/open_sans_semibold"
                 android:textColor="@android:color/white"
-                android:textSize="23sp" />
+                android:textSize="23sp"  />
 
             <CheckBox
                 android:id="@+id/checkMale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/open_sans_semibold"
                 android:text="Male"
+                android:fontFamily="@font/open_sans_semibold"
                 android:textColor="@android:color/white"
                 android:textSize="23sp" />
 

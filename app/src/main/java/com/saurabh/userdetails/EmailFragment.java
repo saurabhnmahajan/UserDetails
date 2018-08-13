@@ -1,7 +1,10 @@
 package com.saurabh.userdetails;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -10,15 +13,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.labo.kaji.fragmentanimations.CubeAnimation;
+import com.labo.kaji.fragmentanimations.MoveAnimation;
+
 public class EmailFragment extends Fragment {
 
     private Bundle b;
     private EditText emailTextView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +36,8 @@ public class EmailFragment extends Fragment {
 
     private void setOldValue() {
         try {
-            String password = b.getString("password");
-            emailTextView.setText(password);
+            String email = b.getString("email");
+            emailTextView.setText(email);
         }
         catch (Exception e) {
             Log.d("email", "not set");
@@ -54,6 +63,11 @@ public class EmailFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return CubeAnimation.create(CubeAnimation.LEFT, enter, 750);
+    }
+
     public void userEmail() {
         String email = emailTextView.getText().toString();
         if(validEmail(email)) {
@@ -62,6 +76,11 @@ public class EmailFragment extends Fragment {
         } else {
             TextView emailInvalid = getView().findViewById(R.id.emailError);
             emailInvalid.setText("Invalid Email Address");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                emailTextView.setBackgroundTintList(ColorStateList.valueOf(Color.argb(255,255,68,68)));
+            }
+            Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
+            emailTextView.startAnimation(shake);
         }
     }
 

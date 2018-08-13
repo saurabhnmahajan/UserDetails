@@ -18,8 +18,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.labo.kaji.fragmentanimations.CubeAnimation;
+import com.labo.kaji.fragmentanimations.MoveAnimation;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -46,6 +51,7 @@ public class ImageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_image, container, false);
+        final TextView imageError = v.findViewById(R.id.imageError);
         imageView = v.findViewById(R.id.imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,11 +69,17 @@ public class ImageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(flag == 1) callNextFragment();
+                else imageError.setText("No Image Selected");
             }
         });
 
         setOldView();
         return v;
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return CubeAnimation.create(CubeAnimation.LEFT, enter, 750);
     }
 
     private void setOldView() {

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
@@ -24,6 +24,7 @@
         <item name="android:padding">15dp</item>
         <item name="android:layout_margin">20dp</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:backgroundTint" tools:ignore="NewApi">#FF009688</item>
         <item name="android:textColorHint">@android:color/white</item>
     </style>
 
@@ -32,9 +33,18 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">0dp</item>
         <item name="android:layout_marginBottom">16dp</item>
-        <item name="android:background">#001818</item>
+        <item name="android:background">#FF024141</item>
         <item name="android:padding">20dp</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="summaryTextView">
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:maxWidth">300dp</item>
     </style>
 
 </resources>

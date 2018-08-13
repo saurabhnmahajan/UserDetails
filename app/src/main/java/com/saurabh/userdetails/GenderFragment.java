@@ -4,6 +4,9 @@ package com.saurabh.userdetails;
 import android.app.DatePickerDialog;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +17,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -21,6 +26,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.labo.kaji.fragmentanimations.CubeAnimation;
+import com.labo.kaji.fragmentanimations.MoveAnimation;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -52,6 +60,8 @@ public class GenderFragment extends Fragment {
         radioGroup = v.findViewById(R.id.radio);
         maleCheck = v.findViewById(R.id.radioMale);
         femaleCheck = v.findViewById(R.id.radioFemale);
+        editText = v.findViewById(R.id.dob);
+
         Button genderSubmit = v.findViewById(R.id.genderSubmit);
         genderSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,13 +75,24 @@ public class GenderFragment extends Fragment {
                         callNextFragment();
                     } else {
                         genderError.setText("Cannot register till you're 18");
+                        Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
+                        editText.startAnimation(shake);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            editText.setBackgroundTintList(ColorStateList.valueOf(Color.argb(255,255,68,68)));
+                        }
                     }
                 }
-                else genderError.setText("Please select your Date of Birth");
+                else {
+                    genderError.setText("Please select your Date of Birth");
+                    Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
+                    editText.startAnimation(shake);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        editText.setBackgroundTintList(ColorStateList.valueOf(Color.argb(255,255,68,68)));
+                    }
+                }
             }
         });
 
-        editText = v.findViewById(R.id.dob);
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,6 +102,11 @@ public class GenderFragment extends Fragment {
 
         setOldValue();
         return v;
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return CubeAnimation.create(CubeAnimation.LEFT, enter, 750);
     }
 
     private int getAge(String dob) {
@@ -156,7 +182,6 @@ public class GenderFragment extends Fragment {
     }
 
     public void userGender() {
-
         int selectedID = radioGroup.getCheckedRadioButtonId();
         RadioButton radioButton = getView().findViewById(selectedID);
         String gender = radioButton.getText().toString();

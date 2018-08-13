@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="textInput">
+        <item name="android:layout_width">335dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ems">10</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:backgroundTint">#FF009688</item>
+        <item name="android:textColorHint">@android:color/white</item>
+    </style>
+</resources>

@@ -2,6 +2,9 @@ package com.saurabh.userdetails;
 
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,10 +13,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.labo.kaji.fragmentanimations.CubeAnimation;
+import com.labo.kaji.fragmentanimations.MoveAnimation;
 
 
 public class NameFragment extends Fragment {
@@ -56,6 +64,11 @@ public class NameFragment extends Fragment {
 
         setOldValue();
         return v;
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return CubeAnimation.create(CubeAnimation.LEFT, enter, 750);
     }
 
     private void setOldValue() {
@@ -129,8 +142,18 @@ public class NameFragment extends Fragment {
             error = "Height cannot be zero or negative";
         else if(height > 246.5)
             error = "Contact Guinness Book now!";
-        else
+        else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                heightTextView.setBackgroundTintList(ColorStateList.valueOf(Color.argb(255,0,150,136)));
+            }
             return true;
+        }
+        Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
+        heightTextView.startAnimation(shake);
+        heightTextView.requestFocus();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            heightTextView.setBackgroundTintList(ColorStateList.valueOf(Color.argb(255,255,68,68)));
+        }
         return false;
     }
 
@@ -139,16 +162,36 @@ public class NameFragment extends Fragment {
             error = "Invalid ZIP code \nCannot be negative";
         else if(String.valueOf(zip).length() != 5)
             error = "Invalid ZIP code \nPlease enter a US ZIP code";
-        else
+        else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                zipTextView.setBackgroundTintList(ColorStateList.valueOf(Color.argb(255,0,150,136)));
+            }
             return true;
+        }
+        Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
+        zipTextView.startAnimation(shake);
+        zipTextView.requestFocus();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            zipTextView.setBackgroundTintList(ColorStateList.valueOf(Color.argb(255,255,68,68)));
+        }
         return false;
     }
 
     private boolean validName(String name) {
         if(!name.trim().contains(" "))
             error = "Enter First and Last name";
-        else
+        else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                nameTextView.setBackgroundTintList(ColorStateList.valueOf(Color.argb(255,0,150,136)));
+            }
             return true;
+        }
+        Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
+        nameTextView.startAnimation(shake);
+        nameTextView.requestFocus();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            nameTextView.setBackgroundTintList(ColorStateList.valueOf(Color.argb(255,255,68,68)));
+        }
         return false;
     }
 }

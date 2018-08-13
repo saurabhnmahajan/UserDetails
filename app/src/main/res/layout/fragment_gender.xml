@@ -103,6 +103,7 @@
             android:layout_marginRight="20dp"
             android:clickable="true"
             android:ems="10"
+            android:backgroundTint="#FF009688"
             android:focusable="false"
             android:fontFamily="@font/open_sans_semibold"
             android:hint="mm-dd-yyyy"
